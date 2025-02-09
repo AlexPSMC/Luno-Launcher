@@ -127,3 +127,12 @@ img {
     background-color: var(--element-color);
     border-radius: 10px;
 }
+
+/* Código para ocultar el fondo gris */
+.background-update {
+    display: none; /* Oculta completamente el elemento */
+    /* Si quieres mantener el espacio pero hacerlo invisible:
+    visibility: hidden;
+    pointer-events: none;
+    */
+}

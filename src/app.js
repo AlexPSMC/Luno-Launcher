@@ -14,7 +14,7 @@ const UpdateWindow = require("./assets/js/windows/updateWindow.js");
 const MainWindow = require("./assets/js/windows/mainWindow.js");
 
 // Configuración de Discord Rich Presence
-const CLIENT_ID = '1338006793082896424';
+const CLIENT_ID = '1332802735111667794';
 RPC.register(CLIENT_ID);
 
 const rpc = new RPC.Client({ transport: 'ipc' });
@@ -23,7 +23,6 @@ async function setActivity() {
     if (!rpc) return;
 
     rpc.setActivity({
-        state: 'Jugando',
         startTimestamp: new Date(),
         largeImageKey: 'launcher_logo',
         largeImageText: 'Owleaf Client',
