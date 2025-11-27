@@ -1,15 +1,15 @@
 {
-    "name": "Owleaf-Client",
-    "preductname": "Owleaf Client",
-    "version": "1.1.3",
+    "name": "ZeroDays-Client",
+    "preductname": "ZeroDays Client",
+    "version": "1.0.0",
     "description": "Launcher oficial de Owleaf Studio",
     "main": "src/app.js",
     "author": {
-        "name": "SoyNicoMx",
-        "email": "owleafstudio@outlook.com",
-        "url": "https://discord.gg/owleafstudio"
+        "name": "AlexPSMC",
+        "email": "AlexPSMC@gmail.com",
+        "url": "https://discord.gg/Privado"
     },
-    "url": "http://na21.holy.gg:19143/Owleaf",
+    "url": "http://172.96.172.240:25590/Launchers/LightMain",
     "scripts": {
         "start": "cross-env-shell NODE_ENV=dev electron .",
         "dev": "cross-env-shell DEV_TOOL=open nodemon --exec npm start",
@@ -40,6 +40,6 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/SoyMRPandax/Owleaf-Launcher.git"
+        "url": "git+https://github.com/AlexPSMC/Luno-Launcher.git"
     }
 }

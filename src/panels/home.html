@@ -3,67 +3,68 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <img class="server-status-icon" src="assets/images/icon.png">
         <div class="server-status-infos">
-            <div></div>
+            <div class="server-status-name">ZeroDays Studio</div>
             <div></div>
         </div>
-        <div>
-            <div></div>
+        <div class="status-player-count">
+            <div class="player-count">0</div>
         </div>
     </div>
-    <div class="header">Owleaf Studio</div>
+    <div></div>
     <video class="video-background" autoplay loop muted playsinline>
         <source src="assets/images/fondo.mp4" type="video/mp4">
     </video>
-    <img src="assets/images/icon.png" alt="Logo" class="logo" width="150">
+
     <div class="home-bottom">
-        <div class="new-tab">
-            <div class="titre-"></div>
-            <div class=""></div>
-        </div>
         <div class="social-tab">
-            <div class="social-list content-scroll">
-                <div data-url="https://discord.gg/owleafstudio" class="social-block">
-                    <div class="icon-discord icon-social"></div>
-                </div>
-
-                <div data-url="https://x.com/OwleafStudio" class="social-block">
-                    <div class="icon-twitter icon-social"></div>
-                </div>
-
-                <div data-url="https://www.tiktok.com/@owleaf_studio" class="social-block">
-                    <div class="icon-tiktok icon-social"></div>
-                </div>
-
-                <div data-url="https://www.instagram.com/owleafstudio/" class="social-block">
-                    <div class="icon-instagram icon-social"></div>
-                </div>
-            </div>
+            <!-- Instance avatars: circular clickable images that switch instances -->
+            <div class="instance-avatars content-scroll"></div>
         </div>
     </div>
 
     <div class="sidebar">
-        <div class="player-options">
-        </div>
-
-        <div class="play-elements">
-            <div class="play-instance">
-                <button class="play-btn">Jugar</button>
-                <div class="instance-select icon-arrow"></div>
-            </div>
-            <div class="info-starting-game">
-                <div class="info-starting-game-text">Conectando...</div>
-                <progress value="0" max="0" class="progress-bar"></progress>
-            </div>
-        </div>
-
+        <div class="instance-select"><h1>+</h1></div>
         <div class="settings-btn icon-settings"></div>
+        <div class="player-options">
+            <div class="player-head"></div>
+        </div>
     </div>
 
     <div class="instance-popup">
         <div class="instances-tab">
             <div class="close-popup icon-close"></div>
-            <p>Selecciona una instancia</p>
+            <p>Selecciona una instancia...</p>
+            
             <div class="instances-List"></div>
+            
+            <!-- Input para códigos de instancias protegidas -->
+            <div>
+                <div></div>
+                <p/p>
+                <div>
+                </div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="play-elements">
+        <div class="play-instance">
+            <button class="play-btn">Play</button>
+        </div>
+        <div class="info-starting-game">
+    <!-- 🔹 NUEVO RECUADRO DE INICIO 🔹 -->
+    <div class="starting-box">
+        <!-- Columna izquierda: texto + progreso -->
+        <div class="starting-left">
+            <div class="starting-title">INICIANDO MINECRAFT...</div>
+            <div class="info-starting-game-text">Conectando...</div>
+            <progress value="0" max="0" class="progress-bar"></progress>
+        </div>
+
+        <!-- Columna derecha: imagen grande -->
+        <div class="starting-right">
+            <img class="starting-icon-big" src="assets/images/instancias/logo.png" alt="Loading Icon">
         </div>
     </div>
 </div>

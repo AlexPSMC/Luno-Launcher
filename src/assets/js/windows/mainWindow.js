@@ -1,5 +1,5 @@
 /**
- * @author Azukar
+ * @author Darken
  * @license CC-BY-NC 4.0 - https://creativecommons.org/licenses/by-nc/4.0
  */
 
@@ -26,12 +26,12 @@ function createWindow() {
         title: pkg.preductname,
         width: 1280,
         height: 720,
-        minWidth: 1280,  
-        minHeight: 720,
-        resizable: false, 
-        maximizable: false, 
+        minWidth: 980,
+        minHeight: 552,
+        resizable: false,
+        maximizable: false,
         icon: `./src/assets/images/icon.${os.platform() === "win32" ? "ico" : "png"}`,
-        frame: os.platform() !== 'win32',
+        frame: false,
         show: false,
         webPreferences: {
             contextIsolation: false,
@@ -43,8 +43,8 @@ function createWindow() {
     mainWindow.loadFile(path.join(`${app.getAppPath()}/src/launcher.html`));
     mainWindow.once('ready-to-show', () => {
         if (mainWindow) {
-            if (dev) mainWindow.webContents.openDevTools({ mode: 'detach' });
-            mainWindow.show();
+            if (dev) mainWindow.webContents.openDevTools({ mode: 'detach' })
+            mainWindow.show()
         }
     });
 }

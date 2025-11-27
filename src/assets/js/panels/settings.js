@@ -1,5 +1,5 @@
 /**
- * @author ruinita
+ * @author Darken
  * @license CC-BY-NC 4.0 - https://creativecommons.org/licenses/by-nc/4.0
  */
 
@@ -20,30 +20,43 @@ class Settings {
         this.launcher()
     }
 
+
+
     navBTN() {
-        document.querySelector('.nav-box').addEventListener('click', e => {
-            if (e.target.classList.contains('nav-settings-btn')) {
-                let id = e.target.id
+        document.querySelector('.settings-tabs').addEventListener('click', e => {
+            const tab = e.target.closest('.settings-tab');
+            if (tab) {
+                let id = tab.id
 
-                let activeSettingsBTN = document.querySelector('.active-settings-BTN')
-                let activeContainerSettings = document.querySelector('.active-container-settings')
+                let activeSettingsBTN = document.querySelector('.active-tab')
+                let activeContainerSettings = document.querySelector('.active-panel')
 
-                if (id == 'save') {
-                    if (activeSettingsBTN) activeSettingsBTN.classList.toggle('active-settings-BTN');
-                    document.querySelector('#account').classList.add('active-settings-BTN');
+                if (activeSettingsBTN) activeSettingsBTN.classList.remove('active-tab');
+                tab.classList.add('active-tab');
 
-                    if (activeContainerSettings) activeContainerSettings.classList.toggle('active-container-settings');
-                    document.querySelector(`#account-tab`).classList.add('active-container-settings');
-                    return changePanel('home')
-                }
-
-                if (activeSettingsBTN) activeSettingsBTN.classList.toggle('active-settings-BTN');
-                e.target.classList.add('active-settings-BTN');
-
-                if (activeContainerSettings) activeContainerSettings.classList.toggle('active-container-settings');
-                document.querySelector(`#${id}-tab`).classList.add('active-container-settings');
+                if (activeContainerSettings) activeContainerSettings.classList.remove('active-panel');
+                document.querySelector(`#${id}-tab`).classList.add('active-panel');
             }
         })
+
+        const saveBtn = document.querySelector('#save.settings-close-btn');
+        if (saveBtn) {
+            saveBtn.addEventListener('click', () => {
+                let activeSettingsBTN = document.querySelector('.active-tab')
+                let activeContainerSettings = document.querySelector('.active-panel')
+
+                if (activeSettingsBTN) activeSettingsBTN.classList.remove('active-tab');
+                document.querySelector('#account').classList.add('active-tab');
+
+                if (activeContainerSettings) activeContainerSettings.classList.remove('active-panel');
+                document.querySelector(`#account-tab`).classList.add('active-panel');
+
+                const cancelHome = document.querySelector('.cancel-home');
+                if (cancelHome) cancelHome.style.display = 'none';
+
+                changePanel('home')
+            })
+        }
     }
 
     accounts() {
@@ -53,8 +66,8 @@ class Settings {
                 let id = e.target.id
                 if (e.target.classList.contains('account')) {
                     popupAccount.openPopup({
-                        title: 'Conexión',
-                        content: 'Espere por favor',
+                        title: 'Connexion',
+                        content: 'Veuillez patienter...',
                         color: 'var(--color)'
                     })
 
@@ -72,8 +85,8 @@ class Settings {
 
                 if (e.target.classList.contains("delete-profile")) {
                     popupAccount.openPopup({
-                        title: 'Conexión',
-                        content: 'Espere por favor...',
+                        title: 'Connexion',
+                        content: 'Veuillez patienter...',
                         color: 'var(--color)'
                     })
                     await this.db.deleteData('accounts', id);
@@ -166,7 +179,7 @@ class Settings {
         javaPathText.textContent = `${await appdata()}/${process.platform == 'darwin' ? this.config.dataDirectory : `.${this.config.dataDirectory}`}/runtime`;
 
         let configClient = await this.db.readData('configClient')
-        let javaPath = configClient?.java_config?.java_path || 'Utilice la versión del libro Java con el iniciador';
+        let javaPath = configClient?.java_config?.java_path || 'Usar la versión de java incluida con el launcher';
         let javaPathInputTxt = document.querySelector(".java-path-input-text");
         let javaPathInputFile = document.querySelector(".java-path-input-file");
         javaPathInputTxt.value = javaPath;
@@ -187,12 +200,12 @@ class Settings {
                 javaPathInputTxt.value = file;
                 configClient.java_config.java_path = file
                 await this.db.updateData('configClient', configClient);
-            } else alert("El nombre del archivo debe ser java o javaww");
+            } else alert("El nombre del archivo debe ser java o javaw");
         });
 
         document.querySelector(".java-path-reset").addEventListener("click", async () => {
             let configClient = await this.db.readData('configClient')
-            javaPathInputTxt.value = 'Utilice la versión del libro Java con el iniciador';
+            javaPathInputTxt.value = 'Usar la versión de java incluida con el launcher';
             configClient.java_config.java_path = null
             await this.db.updateData('configClient', configClient);
         });
@@ -232,61 +245,6 @@ class Settings {
 
     async launcher() {
         let configClient = await this.db.readData('configClient');
-
-        let maxDownloadFiles = configClient?.launcher_config?.download_multi || 5;
-        let maxDownloadFilesInput = document.querySelector(".max-files");
-        let maxDownloadFilesReset = document.querySelector(".max-files-reset");
-        maxDownloadFilesInput.value = maxDownloadFiles;
-
-        maxDownloadFilesInput.addEventListener("change", async () => {
-            let configClient = await this.db.readData('configClient')
-            configClient.launcher_config.download_multi = maxDownloadFilesInput.value;
-            await this.db.updateData('configClient', configClient);
-        })
-
-        maxDownloadFilesReset.addEventListener("click", async () => {
-            let configClient = await this.db.readData('configClient')
-            maxDownloadFilesInput.value = 5
-            configClient.launcher_config.download_multi = 5;
-            await this.db.updateData('configClient', configClient);
-        })
-
-        let themeBox = document.querySelector(".theme-box");
-        let theme = configClient?.launcher_config?.theme || "auto";
-
-        if (theme == "auto") {
-            document.querySelector('.theme-btn-auto').classList.add('active-theme');
-        } else if (theme == "dark") {
-            document.querySelector('.theme-btn-sombre').classList.add('active-theme');
-        } else if (theme == "light") {
-            document.querySelector('.theme-btn-clair').classList.add('active-theme');
-        }
-
-        themeBox.addEventListener("click", async e => {
-            if (e.target.classList.contains('theme-btn')) {
-                let activeTheme = document.querySelector('.active-theme');
-                if (e.target.classList.contains('active-theme')) return
-                activeTheme?.classList.remove('active-theme');
-
-                if (e.target.classList.contains('theme-btn-auto')) {
-                    setBackground();
-                    theme = "auto";
-                    e.target.classList.add('active-theme');
-                } else if (e.target.classList.contains('theme-btn-sombre')) {
-                    setBackground(true);
-                    theme = "dark";
-                    e.target.classList.add('active-theme');
-                } else if (e.target.classList.contains('theme-btn-clair')) {
-                    setBackground(false);
-                    theme = "light";
-                    e.target.classList.add('active-theme');
-                }
-
-                let configClient = await this.db.readData('configClient')
-                configClient.launcher_config.theme = theme;
-                await this.db.updateData('configClient', configClient);
-            }
-        })
 
         let closeBox = document.querySelector(".close-box");
         let closeLauncher = configClient?.launcher_config?.closeLauncher || "close-launcher";

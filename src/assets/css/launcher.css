@@ -4,10 +4,6 @@
 @import 'panels/home.css';
 @import 'panels/settings.css';
 
-#maximize {
-    display: none;
-}
-
 body {
     margin: 0;
     padding: 0;
@@ -15,8 +11,6 @@ body {
     color: var(--color);
     font-family: 'Poppins';
     font-weight: bolder;
-    background-color: transparent; /* Hace el fondo del body transparente */
-    background: none; /* Elimina cualquier fondo aplicado */
 }
 
 img {
@@ -44,20 +38,26 @@ input::-webkit-inner-spin-button {
 
 .dragbar {
     position: fixed;
-    /* background: #00000080; */
     top: 0px;
     left: 0px;
     width: 100%;
     height: 26px;
     -webkit-app-region: drag;
     z-index: 11;
+}
+
+.darwin .frame {
+    background: transparent;
+    position: fixed;
+    top: 0px;
+    z-index: 11;
+    -webkit-app-region: no-drag;
     display: none;
 }
 
-.frame {
+.other .frame {
     background: transparent;
     position: fixed;
-    display: table;
     top: 0px;
     right: 0px;
     z-index: 11;
@@ -65,11 +65,19 @@ input::-webkit-inner-spin-button {
     display: none;
 }
 
-.hide {
+.frame.hide {
     display: block;
 }
 
-.button-frame {
+.darwin .button-frame {
+    position: relative;
+    display: table-cell;
+    width: 20px;
+    height: 26px;
+    transition: color .2s, background-color .2s;
+}
+
+.other .button-frame {
     position: relative;
     display: table-cell;
     width: 30px;
@@ -87,6 +95,35 @@ input::-webkit-inner-spin-button {
     height: 14px;
     font-size: 14px;
     color: #f8f9f9;
+}
+
+.darwin-icon-minimize,
+.darwin-icon-maximize,
+.darwin-icon-close {
+    position: relative;
+}
+
+.darwin-icon-minimize:before,
+.darwin-icon-maximize:before,
+.darwin-icon-close:before {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+}
+
+.darwin-icon-minimize:before {
+    background: #07d014;
+}
+
+.darwin-icon-maximize:before {
+    background: #ffbd2e;
+}
+
+.darwin-icon-close:before {
+    background: #ff6047;
 }
 
 .icon-close:hover {
@@ -149,11 +186,88 @@ input::-webkit-inner-spin-button {
     opacity: 0;
     z-index: 0;
     pointer-events: none;
-    background: transparent; /* Asegura que los paneles también sean transparentes */
 }
 
 .active {
     opacity: 1;
     z-index: 1;
     pointer-events: all;
+}
+
+/* Dynamic launcher background */
+body {
+    background-color: var(--background);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    transition: background-image 0.4s ease-in-out, background-color 0.2s linear;
+}
+
+/* Instance selector - banner card styles */
+.instances-List {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* at least 2 columns */
+    gap: 18px;
+    padding: 20px;
+    align-items: start;
+    max-height: 60vh; /* allow vertical growth but limit height */
+    overflow-y: auto;
+}
+
+/* Responsive: more columns on wider screens */
+@media (min-width: 1100px) {
+    .instances-List { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 1500px) {
+    .instances-List { grid-template-columns: repeat(4, 1fr); }
+}
+
+.instance-card {
+    cursor: pointer;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    transform-origin: center;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+    background: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.02));
+    width: 100%;
+}
+
+.instance-card:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 14px 40px rgba(0,0,0,0.45);
+}
+
+/* Navigation arrows for horizontal scroller */
+.instances-nav { display: none; }
+
+.instance-banner {
+    width: 100%;
+    height: 140px; /* taller banner for horizontal layout */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.instance-banner-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 12px 14px;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 100%);
+    display: flex;
+    align-items: flex-end;
+}
+
+.instance-name {
+    color: #fff;
+    font-weight: 800;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+    font-size: 1.05rem;
+}
+
+.instance-card.active-instance {
+    outline: 3px solid rgba(114,137,218,0.95);
 }
