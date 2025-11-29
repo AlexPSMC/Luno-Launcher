@@ -4,6 +4,16 @@
     flex-direction: column;
     align-items: center;
 }
+
+.logo {
+    position: absolute;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    z-index: 2; 
+    width: 200px; 
+    height: auto; 
+}
 .header {
     position: absolute;
     top: 20px; 
@@ -14,6 +24,7 @@
     font-size: 1em; 
     text-align: center; 
 }
+
 .video-background {
     position: fixed;
     top: 0;
@@ -25,6 +36,30 @@
     filter: blur(5px); 
 }
 
+.content {
+    position: relative;
+    z-index: 1; 
+    color: white;
+    text-align: center;
+    padding-top: 20vh;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0); 
+    z-index: 0; 
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * Status server                                                               *
+ *                                                                             *
+ ******************************************************************************/
+
 /* Status server */
 .status-server {
     position: relative;
@@ -32,7 +67,7 @@
     justify-content: space-between;
     align-items: center;
     background: var(--background-transparent);
-    width: 20rem;
+    width: 21rem;
     height: 3rem;
     color: var(--color);
     border-radius: 10px;
@@ -87,16 +122,6 @@
     display: flex;
 }
 
- .background-video-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: -1;
-}
-
 /* New tab */
 .new-tab {
     display: flex;
@@ -105,6 +130,16 @@
     width: 85%;
     height: 100%;
     margin-left: 7%;
+}
+
+.background-video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
 }
 
 .titre-tab-new {
@@ -170,13 +205,6 @@
     font-weight: 700;
 }
 
-
-/*******************************************************************************
- *                                                                             *
- * Sidebar                                                                     *
- *                                                                             *
- ******************************************************************************/
-
 /* Sidebar */
 .sidebar {
     display: flex;
@@ -210,7 +238,7 @@
     height: 3rem;
     width: 3rem;
     border-radius: 50px;
-    margin-top: -35px;       /* subirlo más al tope */
+    margin-top: -38px;       /* subirlo más al tope */
     border: 3px solid rgb(61, 232, 255); /* borde blanco */
 }
 
@@ -251,7 +279,7 @@
 
 .play-btn {
     border: none;
-    border-radius: 10px;
+    border-radius: 20px;
     background: none;
     color: var(--color);
     font-size: 2rem;
@@ -728,8 +756,8 @@
 
 .code-unlock-button {
     padding: 0.7rem 2rem;
-    background: #00000000;
-    color: #00000000;
+    background: var(--element-color);
+    color: var(--background);
     border: none;
     border-radius: 8px;
     font-size: 1rem;
@@ -740,7 +768,7 @@
 
 .code-unlock-button:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 15px #00000000;
+    box-shadow: 0 0 15px var(--element-color);
 }
 
 .code-unlock-button:active {
@@ -754,4 +782,24 @@
     margin-top: 0.5rem;
     font-weight: bold;
     transition: all 0.3s ease;
+}
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease-out; 
+  }
+
+  html {
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: hidden; /* For Internet Explorer and Edge */
+}
+
+html::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+}
+
+@keyframes fall{
+    to {
+      transform: translateY(105vh);
+    }
 }

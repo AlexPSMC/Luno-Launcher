@@ -1,5 +1,5 @@
 /**
- * @author Darken
+ * @author SoyPandax
  * @license CC-BY-NC 4.0 - https://creativecommons.org/licenses/by-nc/4.0
  */
 import { config, database, logger, changePanel, appdata, setStatus, pkg, popup } from '../utils.js'
@@ -88,31 +88,6 @@ class Home {
         
         console.log('filterAuthorizedInstances: total instances in =', instancesList.length, 'filtered out =', filtered.length);
         return filtered;
-    }
-
-    setBackground(url) {
-        try {
-            if (!url) {
-                document.body.style.backgroundImage = '';
-                this.currentBackground = null;
-                return;
-            }
-
-            const img = new Image();
-            img.onload = () => {
-                document.body.style.backgroundImage = `url('${url}')`;
-                this.currentBackground = url;
-            };
-            img.onerror = () => {
-                console.warn('No se pudo cargar la imagen de fondo:', url);
-                document.body.style.backgroundImage = '';
-                this.currentBackground = null;
-            };
-            img.src = url;
-        } catch (e) {
-            console.warn('Error estableciendo fondo:', e);
-            document.body.style.backgroundImage = '';
-        }
     }
 
     async news() {
@@ -439,7 +414,7 @@ class Home {
                 console.log("Usuario detectado:", usuario);
               
                 try {
-                    const response = await fetch(`http://mc.paellahosting.com:49158/api/validate.php`, {
+                    const response = await fetch(`http://172.96.172.240:25590/api/validate.php`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -624,7 +599,7 @@ class Home {
 
         launch.on('extract', () => ipcRenderer.send('main-window-progress-load'));
         launch.on('progress', (progress, size) => {
-            infoStarting.innerHTML = `Descargando ${((progress / size) * 100).toFixed(0)}%`;
+            infoStarting.innerHTML = `Descargando... ${((progress / size) * 100).toFixed(0)}%`;
             ipcRenderer.send('main-window-progress', { progress, size });
             if (progressBar) {
                 progressBar.value = progress;
@@ -632,7 +607,7 @@ class Home {
             }
         });
         launch.on('check', (progress, size) => {
-            infoStarting.innerHTML = `Verificando ${((progress / size) * 100).toFixed(0)}%`;
+            infoStarting.innerHTML = `Verificando... ${((progress / size) * 100).toFixed(0)}%`;
             ipcRenderer.send('main-window-progress', { progress, size });
             if (progressBar) {
                 progressBar.value = progress;
@@ -641,7 +616,7 @@ class Home {
         });
         launch.on('estimated', time => console.log(`Tiempo estimado: ${time}s`));
         launch.on('speed', speed => console.log(`${(speed / 1067008).toFixed(2)} Mb/s`));
-        launch.on('patch', () => { if (infoStarting) infoStarting.innerHTML = `Parche en curso...`; });
+        launch.on('patch', () => { if (infoStarting) infoStarting.innerHTML = `Abriendo Minecraft...`; });
         launch.on('data', () => {
             if (progressBar) progressBar.style.display = "none";
             if (infoStarting) infoStarting.innerHTML = `Jugando...`;
@@ -651,7 +626,7 @@ class Home {
             ipcRenderer.send('main-window-progress-reset');
             if (infoStartingBOX) infoStartingBOX.style.display = "none";
             if (playInstanceBTN) playInstanceBTN.style.display = "flex";
-            if (infoStarting) infoStarting.innerHTML = `Verificando`;
+            if (infoStarting) infoStarting.innerHTML = `Verificando...`;
             new logger(pkg.name, '#7289da');
         });
         launch.on('error', err => {
@@ -660,7 +635,7 @@ class Home {
             ipcRenderer.send('main-window-progress-reset');
             if (infoStartingBOX) infoStartingBOX.style.display = "none";
             if (playInstanceBTN) playInstanceBTN.style.display = "flex";
-            if (infoStarting) infoStarting.innerHTML = `Verificando`;
+            if (infoStarting) infoStarting.innerHTML = `Verificando...`;
             new logger(pkg.name, '#7289da');
         });
 

@@ -1,20 +1,20 @@
 {
-    "name": "ZeroDays-Client",
-    "preductname": "ZeroDays Client",
-    "version": "1.0.0",
-    "description": "Launcher oficial de Owleaf Studio",
+    "name": "Light-Client",
+    "preductname": "Light Client",
+    "version": "1.7.5",
+    "description": "Launcher oficial de Light Studio",
     "main": "src/app.js",
     "author": {
         "name": "AlexPSMC",
-        "email": "AlexPSMC@gmail.com",
-        "url": "https://discord.gg/Privado"
+        "email": "soypancraft@gmail.com",
+        "url": "https://github.com/AlexPSMC"
     },
     "url": "http://172.96.172.240:25590/Launchers/LightMain",
     "scripts": {
         "start": "cross-env-shell NODE_ENV=dev electron .",
         "dev": "cross-env-shell DEV_TOOL=open nodemon --exec npm start",
         "build": "node build.js --obf=true --build=platform",
-        "icon": "node build.js --icon=https://raw.githubusercontent.com/luuxis/Selvania-Launcher/master/src/assets/images/icon.png"
+        "icon": "node build.js --icon=https://raw.githubusercontent.com/AlexPSMC/Luno-Launcher/master/src/assets/images/icon.png"
     },
     "license": "CCANC",
     "nodemonConfig": {

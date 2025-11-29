@@ -21,21 +21,21 @@
 }
 
 .login-text2 {
-    font-size: 2.7rem;
+    font-size: 2.9rem;
     position: relative;
-    top: -30px; /* mueve 20px hacia arriba */
+    top: -16px; /* mueve 20px hacia arriba */
 }
 
 .login-text {
-    font-size: 2.9rem;
+    font-size: 3rem;
     position: relative;
-    top: -10px; /* mueve 20px hacia arriba */
+    top: -2px; /* mueve 20px hacia arriba */
 }
 
 .login-text3 {
-    font-size: 2.9rem;
+    font-size: 3rem;
     position: relative;
-    top: -10px; /* mueve 20px hacia arriba */
+    top: -2px; /* mueve 20px hacia arriba */
     background: linear-gradient(90deg, #e000ff, #00ffe0, #ffea00);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -54,11 +54,12 @@
     top: -10px; /* mueve 20px hacia arriba */
 }
 
+/* Todos los botones (Conectar, Cancelar, Microsoft, Offline...) */
 .connect,
 .cancel {
-    background: none;
-    color: var(--color);
-    border: solid 4px var(--element-color);
+    background: #ff48d6;        /* Rosa */
+    color: white;               /* Texto blanco */
+    border: solid 4px #ff48d6;  /* Borde rosa */
     border-radius: 10px;
     padding: 0.3rem 4rem;
     font-size: inherit;
@@ -70,7 +71,10 @@
 .connect:hover,
 .cancel:hover {
     transform: scale(1.1);
+    background: #da26aa;        /* Rosa fuerte */
+    border-color: #da26aa;
 }
+
 
 .input-login .email,
 .input-login .password,
@@ -86,4 +90,38 @@
 
 .login-select {
     display: none;
+}
+
+/* SOLO los botones de Microsoft y Offline (pantalla principal) */
+.select-microsoft,
+.select-offline {
+    background: #ff48d6;             /* Rosa */
+    color: white;                    /* Texto blanco */
+    border-color: #ff48d6;           /* Borde rosa fuerte */
+}
+
+.select-microsoft:hover,
+.select-offline:hover {
+    transform: scale(1.1);
+    background: #da26aa;             /* Rosa más fuerte al pasar el mouse */
+}
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease-out; 
+  }
+
+  html {
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: hidden; /* For Internet Explorer and Edge */
+}
+
+html::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+}
+
+@keyframes fall{
+    to {
+      transform: translateY(105vh);
+    }
 }

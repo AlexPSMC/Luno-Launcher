@@ -32,7 +32,7 @@ body {
 .splash {
     display: block;
     margin: 0 auto 18px;
-    width: 250px;         /* logo más grande */
+    width: 220px;         /* logo más grande */
     height: auto;
     transition: opacity .35s ease, transform .35s ease;
     opacity: 0;
